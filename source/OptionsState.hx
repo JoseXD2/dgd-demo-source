@@ -82,7 +82,11 @@ class OptionsState extends MusicBeatState
 		resetScreen.screenCenter();
 		resetScreen.alpha = 0;
 		add(resetScreen);
-
+		
+                #if android
+	        addVirtualPad(UP_DOWN, A_B);
+                #end
+			
 		super.create();
 	}
 
