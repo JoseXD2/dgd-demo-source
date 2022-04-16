@@ -49,7 +49,11 @@ class TitleState extends MusicBeatState
 	var wackyImage:FlxSprite;
 
 	override public function create():Void
-	{
+	{ 
+		#if android
+		FlxG.android.preventDefaultKeys = [BACK];
+		#end
+			
 		#if (polymod && !html5)
 		if (sys.FileSystem.exists('mods/')) {
 			var folders:Array<String> = [];
