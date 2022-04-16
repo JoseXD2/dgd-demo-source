@@ -10,6 +10,12 @@ import flixel.input.actions.FlxActionSet;
 import flixel.input.gamepad.FlxGamepadButton;
 import flixel.input.gamepad.FlxGamepadInputID;
 import flixel.input.keyboard.FlxKey;
+#if android
+import flixel.group.FlxGroup;
+import android.FlxHitbox;
+import android.FlxVirtualPad;
+import flixel.ui.FlxButton;
+#end
 
 #if (haxe >= "4.0.0")
 enum abstract Action(String) to String from String
@@ -30,76 +36,18 @@ enum abstract Action(String) to String from String
 	var NOTE_LEFT = "note_left";
 	var NOTE_RIGHT = "note_right";
 	var NOTE_DOWN = "note_down";
-	var NOTE_SPACE = "note_space";
 	var NOTE_UP_P = "note_up-press";
 	var NOTE_LEFT_P = "note_left-press";
 	var NOTE_RIGHT_P = "note_right-press";
 	var NOTE_DOWN_P = "note_down-press";
-	var NOTE_SPACE_P = "note_space-press";
 	var NOTE_UP_R = "note_up-release";
 	var NOTE_LEFT_R = "note_left-release";
 	var NOTE_RIGHT_R = "note_right-release";
 	var NOTE_DOWN_R = "note_down-release";
-	var NOTE_SPACE_R = "note_space-release";
 	var ACCEPT = "accept";
 	var BACK = "back";
 	var PAUSE = "pause";
 	var RESET = "reset";
-
-	var A1 = 'a1';
-	var A2 = 'a2';
-	var A3 = 'a3';
-	var A4 = 'a4';
-	var A5 = 'a5';
-	var A6 = 'a6';
-	var A7 = 'a7';
-
-	var A1_P = 'a1-press';
-	var A2_P = 'a2-press';
-	var A3_P = 'a3-press';
-	var A4_P = 'a4-press';
-	var A5_P = 'a5-press';
-	var A6_P = 'a6-press';
-	var A7_P = 'a7-press';
-
-	var A1_R = 'a1-release';
-	var A2_R = 'a2-release';
-	var A3_R = 'a3-release';
-	var A4_R = 'a4-release';
-	var A5_R = 'a5-release';
-	var A6_R = 'a6-release';
-	var A7_R = 'a7-release';
-
-
-	var B1 = 'b1';
-	var B2 = 'b2';
-	var B3 = 'b3';
-	var B4 = 'b4';
-	var B5 = 'b5';
-	var B6 = 'b6';
-	var B7 = 'b7';
-	var B8 = 'b8';
-	var B9 = 'b9';
-
-	var B1_P = 'b1-press';
-	var B2_P = 'b2-press';
-	var B3_P = 'b3-press';
-	var B4_P = 'b4-press';
-	var B5_P = 'b5-press';
-	var B6_P = 'b6-press';
-	var B7_P = 'b7-press';
-	var B8_P = 'b8-press';
-	var B9_P = 'b9-press';
-
-	var B1_R = 'b1-release';
-	var B2_R = 'b2-release';
-	var B3_R = 'b3-release';
-	var B4_R = 'b4-release';
-	var B5_R = 'b5-release';
-	var B6_R = 'b6-release';
-	var B7_R = 'b7-release';
-	var B8_R = 'b8-release';
-	var B9_R = 'b9-release';
 }
 #else
 @:enum
@@ -121,76 +69,18 @@ abstract Action(String) to String from String
 	var NOTE_LEFT = "note_left";
 	var NOTE_RIGHT = "note_right";
 	var NOTE_DOWN = "note_down";
-	var NOTE_SPACE = "note_space";
 	var NOTE_UP_P = "note_up-press";
 	var NOTE_LEFT_P = "note_left-press";
 	var NOTE_RIGHT_P = "note_right-press";
 	var NOTE_DOWN_P = "note_down-press";
-	var NOTE_SPACE_P = "note_space-press";
 	var NOTE_UP_R = "note_up-release";
 	var NOTE_LEFT_R = "note_left-release";
 	var NOTE_RIGHT_R = "note_right-release";
 	var NOTE_DOWN_R = "note_down-release";
-	var NOTE_SPACE_R = "note_space-release";
 	var ACCEPT = "accept";
 	var BACK = "back";
 	var PAUSE = "pause";
 	var RESET = "reset";
-
-	var A1 = 'a1';
-	var A2 = 'a2';
-	var A3 = 'a3';
-	var A4 = 'a4';
-	var A5 = 'a5';
-	var A6 = 'a6';
-	var A7 = 'a7';
-
-	var A1_P = 'a1-press';
-	var A2_P = 'a2-press';
-	var A3_P = 'a3-press';
-	var A4_P = 'a4-press';
-	var A5_P = 'a5-press';
-	var A6_P = 'a6-press';
-	var A7_P = 'a7-press';
-
-	var A1_R = 'a1-release';
-	var A2_R = 'a2-release';
-	var A3_R = 'a3-release';
-	var A4_R = 'a4-release';
-	var A5_R = 'a5-release';
-	var A6_R = 'a6-release';
-	var A7_R = 'a7-release';
-
-
-	var B1 = 'b1';
-	var B2 = 'b2';
-	var B3 = 'b3';
-	var B4 = 'b4';
-	var B5 = 'b5';
-	var B6 = 'b6';
-	var B7 = 'b7';
-	var B8 = 'b8';
-	var B9 = 'b9';
-
-	var B1_P = 'b1-press';
-	var B2_P = 'b2-press';
-	var B3_P = 'b3-press';
-	var B4_P = 'b4-press';
-	var B5_P = 'b5-press';
-	var B6_P = 'b6-press';
-	var B7_P = 'b7-press';
-	var B8_P = 'b8-press';
-	var B9_P = 'b9-press';
-
-	var B1_R = 'b1-release';
-	var B2_R = 'b2-release';
-	var B3_R = 'b3-release';
-	var B4_R = 'b4-release';
-	var B5_R = 'b5-release';
-	var B6_R = 'b6-release';
-	var B7_R = 'b7-release';
-	var B8_R = 'b8-release';
-	var B9_R = 'b9-release';
 }
 #end
 
@@ -215,29 +105,10 @@ enum Control
 	NOTE_LEFT;
 	NOTE_RIGHT;
 	NOTE_DOWN;
-	NOTE_SPACE;
 	RESET;
 	ACCEPT;
 	BACK;
 	PAUSE;
-
-	A1;
-	A2;
-	A3;
-	A4;
-	A5;
-	A6;
-	A7;
-
-	B1;
-	B2;
-	B3;
-	B4;
-	B5;
-	B6;
-	B7;
-	B8;
-	B9;
 }
 
 enum KeyboardScheme
@@ -270,76 +141,18 @@ class Controls extends FlxActionSet
 	var _note_left = new FlxActionDigital(Action.NOTE_LEFT);
 	var _note_right = new FlxActionDigital(Action.NOTE_RIGHT);
 	var _note_down = new FlxActionDigital(Action.NOTE_DOWN);
-	var _note_space = new FlxActionDigital(Action.NOTE_SPACE);
 	var _note_upP = new FlxActionDigital(Action.NOTE_UP_P);
 	var _note_leftP = new FlxActionDigital(Action.NOTE_LEFT_P);
 	var _note_rightP = new FlxActionDigital(Action.NOTE_RIGHT_P);
 	var _note_downP = new FlxActionDigital(Action.NOTE_DOWN_P);
-	var _note_spaceP = new FlxActionDigital(Action.NOTE_SPACE_P);
 	var _note_upR = new FlxActionDigital(Action.NOTE_UP_R);
 	var _note_leftR = new FlxActionDigital(Action.NOTE_LEFT_R);
 	var _note_rightR = new FlxActionDigital(Action.NOTE_RIGHT_R);
 	var _note_downR = new FlxActionDigital(Action.NOTE_DOWN_R);
-	var _note_spaceR = new FlxActionDigital(Action.NOTE_SPACE_R);
 	var _accept = new FlxActionDigital(Action.ACCEPT);
 	var _back = new FlxActionDigital(Action.BACK);
 	var _pause = new FlxActionDigital(Action.PAUSE);
 	var _reset = new FlxActionDigital(Action.RESET);
-
-	var _a1 = new FlxActionDigital(Action.A1);
-	var _a2 = new FlxActionDigital(Action.A2);
-	var _a3 = new FlxActionDigital(Action.A3);
-	var _a4 = new FlxActionDigital(Action.A4);
-	var _a5 = new FlxActionDigital(Action.A5);
-	var _a6 = new FlxActionDigital(Action.A6);
-	var _a7 = new FlxActionDigital(Action.A7);
-
-	var _a1P = new FlxActionDigital(Action.A1_P);
-	var _a2P = new FlxActionDigital(Action.A2_P);
-	var _a3P = new FlxActionDigital(Action.A3_P);
-	var _a4P = new FlxActionDigital(Action.A4_P);
-	var _a5P = new FlxActionDigital(Action.A5_P);
-	var _a6P = new FlxActionDigital(Action.A6_P);
-	var _a7P = new FlxActionDigital(Action.A7_P);
-
-	var _a1R = new FlxActionDigital(Action.A1_R);
-	var _a2R = new FlxActionDigital(Action.A2_R);
-	var _a3R = new FlxActionDigital(Action.A3_R);
-	var _a4R = new FlxActionDigital(Action.A4_R);
-	var _a5R = new FlxActionDigital(Action.A5_R);
-	var _a6R = new FlxActionDigital(Action.A6_R);
-	var _a7R = new FlxActionDigital(Action.A7_R);
-
-
-	var _b1 = new FlxActionDigital(Action.B1);
-	var _b2 = new FlxActionDigital(Action.B2);
-	var _b3 = new FlxActionDigital(Action.B3);
-	var _b4 = new FlxActionDigital(Action.B4);
-	var _b5 = new FlxActionDigital(Action.B5);
-	var _b6 = new FlxActionDigital(Action.B6);
-	var _b7 = new FlxActionDigital(Action.B7);
-	var _b8 = new FlxActionDigital(Action.B8);
-	var _b9 = new FlxActionDigital(Action.B9);
-
-	var _b1P = new FlxActionDigital(Action.B1_P);
-	var _b2P = new FlxActionDigital(Action.B2_P);
-	var _b3P = new FlxActionDigital(Action.B3_P);
-	var _b4P = new FlxActionDigital(Action.B4_P);
-	var _b5P = new FlxActionDigital(Action.B5_P);
-	var _b6P = new FlxActionDigital(Action.B6_P);
-	var _b7P = new FlxActionDigital(Action.B7_P);
-	var _b8P = new FlxActionDigital(Action.B8_P);
-	var _b9P = new FlxActionDigital(Action.B9_P);
-
-	var _b1R = new FlxActionDigital(Action.B1_R);
-	var _b2R = new FlxActionDigital(Action.B2_R);
-	var _b3R = new FlxActionDigital(Action.B3_R);
-	var _b4R = new FlxActionDigital(Action.B4_R);
-	var _b5R = new FlxActionDigital(Action.B5_R);
-	var _b6R = new FlxActionDigital(Action.B6_R);
-	var _b7R = new FlxActionDigital(Action.B7_R);
-	var _b8R = new FlxActionDigital(Action.B8_R);
-	var _b9R = new FlxActionDigital(Action.B9_R);
 
 	#if (haxe >= "4.0.0")
 	var byName:Map<String, FlxActionDigital> = [];
@@ -429,11 +242,6 @@ class Controls extends FlxActionSet
 
 	inline function get_NOTE_DOWN()
 		return _note_down.check();
-				
-	public var NOTE_SPACE(get, never):Bool;
-
-	inline function get_NOTE_SPACE()
-		return _note_space.check();
 
 	public var NOTE_UP_P(get, never):Bool;
 
@@ -454,11 +262,6 @@ class Controls extends FlxActionSet
 
 	inline function get_NOTE_DOWN_P()
 		return _note_downP.check();
-		
-	public var NOTE_SPACE_P(get, never):Bool;
-
-	inline function get_NOTE_SPACE_P()
-		return _note_spaceP.check();
 
 	public var NOTE_UP_R(get, never):Bool;
 
@@ -480,11 +283,6 @@ class Controls extends FlxActionSet
 	inline function get_NOTE_DOWN_R()
 		return _note_downR.check();
 
-	public var NOTE_SPACE_R(get, never):Bool;
-
-	inline function get_NOTE_SPACE_R()
-		return _note_spaceR.check();
-
 	public var ACCEPT(get, never):Bool;
 
 	inline function get_ACCEPT()
@@ -504,61 +302,6 @@ class Controls extends FlxActionSet
 
 	inline function get_RESET()
 		return _reset.check();
-
-	public var A1(get, never):Bool; inline function get_A1() {return _a1.check();}
-	public var A2(get, never):Bool; inline function get_A2() {return _a2.check();}
-	public var A3(get, never):Bool; inline function get_A3() {return _a3.check();}
-	public var A4(get, never):Bool; inline function get_A4() {return _a4.check();}
-	public var A5(get, never):Bool; inline function get_A5() {return _a5.check();}
-	public var A6(get, never):Bool; inline function get_A6() {return _a6.check();}
-	public var A7(get, never):Bool; inline function get_A7() {return _a7.check();}
-
-	public var A1_P(get, never):Bool; inline function get_A1_P() {return _a1P.check();}
-	public var A2_P(get, never):Bool; inline function get_A2_P() {return _a2P.check();}
-	public var A3_P(get, never):Bool; inline function get_A3_P() {return _a3P.check();}
-	public var A4_P(get, never):Bool; inline function get_A4_P() {return _a4P.check();}
-	public var A5_P(get, never):Bool; inline function get_A5_P() {return _a5P.check();}
-	public var A6_P(get, never):Bool; inline function get_A6_P() {return _a6P.check();}
-	public var A7_P(get, never):Bool; inline function get_A7_P() {return _a7P.check();}
-
-	public var A1_R(get, never):Bool; inline function get_A1_R() {return _a1R.check();}
-	public var A2_R(get, never):Bool; inline function get_A2_R() {return _a2R.check();}
-	public var A3_R(get, never):Bool; inline function get_A3_R() {return _a3R.check();}
-	public var A4_R(get, never):Bool; inline function get_A4_R() {return _a4R.check();}
-	public var A5_R(get, never):Bool; inline function get_A5_R() {return _a5R.check();}
-	public var A6_R(get, never):Bool; inline function get_A6_R() {return _a6R.check();}
-	public var A7_R(get, never):Bool; inline function get_A7_R() {return _a7R.check();}
-
-
-	public var B1(get, never):Bool; inline function get_B1() {return _b1.check();}
-	public var B2(get, never):Bool; inline function get_B2() {return _b2.check();}
-	public var B3(get, never):Bool; inline function get_B3() {return _b3.check();}
-	public var B4(get, never):Bool; inline function get_B4() {return _b4.check();}
-	public var B5(get, never):Bool; inline function get_B5() {return _b5.check();}
-	public var B6(get, never):Bool; inline function get_B6() {return _b6.check();}
-	public var B7(get, never):Bool; inline function get_B7() {return _b7.check();}
-	public var B8(get, never):Bool; inline function get_B8() {return _b8.check();}
-	public var B9(get, never):Bool; inline function get_B9() {return _b9.check();}
-
-	public var B1_P(get, never):Bool; inline function get_B1_P() {return _b1P.check();}
-	public var B2_P(get, never):Bool; inline function get_B2_P() {return _b2P.check();}
-	public var B3_P(get, never):Bool; inline function get_B3_P() {return _b3P.check();}
-	public var B4_P(get, never):Bool; inline function get_B4_P() {return _b4P.check();}
-	public var B5_P(get, never):Bool; inline function get_B5_P() {return _b5P.check();}
-	public var B6_P(get, never):Bool; inline function get_B6_P() {return _b6P.check();}
-	public var B7_P(get, never):Bool; inline function get_B7_P() {return _b7P.check();}
-	public var B8_P(get, never):Bool; inline function get_B8_P() {return _b8P.check();}
-	public var B9_P(get, never):Bool; inline function get_B9_P() {return _b9P.check();}
-
-	public var B1_R(get, never):Bool; inline function get_B1_R() {return _b1R.check();}
-	public var B2_R(get, never):Bool; inline function get_B2_R() {return _b2R.check();}
-	public var B3_R(get, never):Bool; inline function get_B3_R() {return _b3R.check();}
-	public var B4_R(get, never):Bool; inline function get_B4_R() {return _b4R.check();}
-	public var B5_R(get, never):Bool; inline function get_B5_R() {return _b5R.check();}
-	public var B6_R(get, never):Bool; inline function get_B6_R() {return _b6R.check();}
-	public var B7_R(get, never):Bool; inline function get_B7_R() {return _b7R.check();}
-	public var B8_R(get, never):Bool; inline function get_B8_R() {return _b8R.check();}
-	public var B9_R(get, never):Bool; inline function get_B9_R() {return _b9R.check();}
 
 	#if (haxe >= "4.0.0")
 	public function new(name, scheme = None)
@@ -581,76 +324,18 @@ class Controls extends FlxActionSet
 		add(_note_left);
 		add(_note_right);
 		add(_note_down);
-		add(_note_space);
 		add(_note_upP);
 		add(_note_leftP);
 		add(_note_rightP);
 		add(_note_downP);
-		add(_note_spaceP);
 		add(_note_upR);
 		add(_note_leftR);
 		add(_note_rightR);
 		add(_note_downR);
-		add(_note_spaceR);
 		add(_accept);
 		add(_back);
 		add(_pause);
 		add(_reset);
-
-		add(_a1);
-		add(_a2);
-		add(_a3);
-		add(_a4);
-		add(_a5);
-		add(_a6);
-		add(_a7);
-
-		add(_a1P);
-		add(_a2P);
-		add(_a3P);
-		add(_a4P);
-		add(_a5P);
-		add(_a6P);
-		add(_a7P);
-
-		add(_a1R);
-		add(_a2R);
-		add(_a3R);
-		add(_a4R);
-		add(_a5R);
-		add(_a6R);
-		add(_a7R);
-
-
-		add(_b1);
-		add(_b2);
-		add(_b3);
-		add(_b4);
-		add(_b5);
-		add(_b6);
-		add(_b7);
-		add(_b8);
-		add(_b9);
-
-		add(_b1P);
-		add(_b2P);
-		add(_b3P);
-		add(_b4P);
-		add(_b5P);
-		add(_b6P);
-		add(_b7P);
-		add(_b8P);
-		add(_b9P);
-
-		add(_b1R);
-		add(_b2R);
-		add(_b3R);
-		add(_b4R);
-		add(_b5R);
-		add(_b6R);
-		add(_b7R);
-		add(_b8R);
-		add(_b9R);
 
 		for (action in digitalActions)
 			byName[action.name] = action;
@@ -678,76 +363,18 @@ class Controls extends FlxActionSet
 		add(_note_left);
 		add(_note_right);
 		add(_note_down);
-		add(_note_space);
 		add(_note_upP);
 		add(_note_leftP);
 		add(_note_rightP);
 		add(_note_downP);
-		add(_note_spaceP);
 		add(_note_upR);
 		add(_note_leftR);
 		add(_note_rightR);
 		add(_note_downR);
-		add(_note_spaceR);
 		add(_accept);
 		add(_back);
 		add(_pause);
 		add(_reset);
-
-		add(_a1);
-		add(_a2);
-		add(_a3);
-		add(_a4);
-		add(_a5);
-		add(_a6);
-		add(_a7);
-
-		add(_a1P);
-		add(_a2P);
-		add(_a3P);
-		add(_a4P);
-		add(_a5P);
-		add(_a6P);
-		add(_a7P);
-
-		add(_a1R);
-		add(_a2R);
-		add(_a3R);
-		add(_a4R);
-		add(_a5R);
-		add(_a6R);
-		add(_a7R);
-
-
-		add(_b1);
-		add(_b2);
-		add(_b3);
-		add(_b4);
-		add(_b5);
-		add(_b6);
-		add(_b7);
-		add(_b8);
-		add(_b9);
-
-		add(_b1P);
-		add(_b2P);
-		add(_b3P);
-		add(_b4P);
-		add(_b5P);
-		add(_b6P);
-		add(_b7P);
-		add(_b8P);
-		add(_b9P);
-
-		add(_b1R);
-		add(_b2R);
-		add(_b3R);
-		add(_b4R);
-		add(_b5R);
-		add(_b6R);
-		add(_b7R);
-		add(_b8R);
-		add(_b9R);
 
 		for (action in digitalActions)
 			byName[action.name] = action;
@@ -756,6 +383,176 @@ class Controls extends FlxActionSet
 			scheme = None;
 		setKeyboardScheme(scheme, false);
 	}
+	#end
+
+	#if android
+	public var trackedinputsUI:Array<FlxActionInput> = [];
+	public var trackedinputsNOTES:Array<FlxActionInput> = [];	
+
+	public function addbuttonNOTES(action:FlxActionDigital, button:FlxButton, state:FlxInputState) 
+	{
+		var input = new FlxActionInputDigitalIFlxInput(button, state);
+		trackedinputsNOTES.push(input);
+		action.add(input);
+	}
+
+	public function addbuttonUI(action:FlxActionDigital, button:FlxButton, state:FlxInputState) {
+		var input = new FlxActionInputDigitalIFlxInput(button, state);
+		trackedinputsUI.push(input);
+		action.add(input);
+	}
+
+	public function setHitBox(hitbox:FlxHitbox) 
+	{
+		inline forEachBound(Control.NOTE_UP, (action, state) -> addbuttonNOTES(action, hitbox.buttonUp, state));
+		inline forEachBound(Control.NOTE_DOWN, (action, state) -> addbuttonNOTES(action, hitbox.buttonDown, state));
+		inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbuttonNOTES(action, hitbox.buttonLeft, state));
+		inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addbuttonNOTES(action, hitbox.buttonRight, state));	
+	}
+	
+	public function setVirtualPadUI(virtualPad:FlxVirtualPad, ?DPad:FlxDPadMode, ?Action:FlxActionMode) 
+	{
+		switch (DPad)
+		{
+			case UP_DOWN:
+				inline forEachBound(Control.UI_UP, (action, state) -> addbuttonUI(action, virtualPad.buttonUp, state));
+				inline forEachBound(Control.UI_DOWN, (action, state) -> addbuttonUI(action, virtualPad.buttonDown, state));
+			case LEFT_RIGHT:
+				inline forEachBound(Control.UI_LEFT, (action, state) -> addbuttonUI(action, virtualPad.buttonLeft, state));
+				inline forEachBound(Control.UI_RIGHT, (action, state) -> addbuttonUI(action, virtualPad.buttonRight, state));
+			case UP_LEFT_RIGHT:
+				inline forEachBound(Control.UI_UP, (action, state) -> addbuttonUI(action, virtualPad.buttonUp, state));
+				inline forEachBound(Control.UI_LEFT, (action, state) -> addbuttonUI(action, virtualPad.buttonLeft, state));
+				inline forEachBound(Control.UI_RIGHT, (action, state) -> addbuttonUI(action, virtualPad.buttonRight, state));
+			case FULL | RIGHT_FULL:
+				inline forEachBound(Control.UI_UP, (action, state) -> addbuttonUI(action, virtualPad.buttonUp, state));
+				inline forEachBound(Control.UI_DOWN, (action, state) -> addbuttonUI(action, virtualPad.buttonDown, state));
+				inline forEachBound(Control.UI_LEFT, (action, state) -> addbuttonUI(action, virtualPad.buttonLeft, state));
+				inline forEachBound(Control.UI_RIGHT, (action, state) -> addbuttonUI(action, virtualPad.buttonRight, state));	
+			case DUO:
+				inline forEachBound(Control.UI_UP, (action, state) -> addbuttonUI(action, virtualPad.buttonUp, state));
+				inline forEachBound(Control.UI_DOWN, (action, state) -> addbuttonUI(action, virtualPad.buttonDown, state));
+				inline forEachBound(Control.UI_LEFT, (action, state) -> addbuttonUI(action, virtualPad.buttonLeft, state));
+				inline forEachBound(Control.UI_RIGHT, (action, state) -> addbuttonUI(action, virtualPad.buttonRight, state));	
+
+				inline forEachBound(Control.UI_UP, (action, state) -> addbuttonUI(action, virtualPad.buttonUp2, state));
+				inline forEachBound(Control.UI_DOWN, (action, state) -> addbuttonUI(action, virtualPad.buttonDown2, state));
+				inline forEachBound(Control.UI_LEFT, (action, state) -> addbuttonUI(action, virtualPad.buttonLeft2, state));
+				inline forEachBound(Control.UI_RIGHT, (action, state) -> addbuttonUI(action, virtualPad.buttonRight2, state));                        
+			case NONE:
+		}
+
+		switch (Action)
+		{
+			case A:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonUI(action, virtualPad.buttonA, state));
+                        case B:
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonUI(action, virtualPad.buttonB, state));
+			case D:
+                                //nothing				
+			case A_B:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonUI(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonUI(action, virtualPad.buttonB, state));
+			case A_B_C:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonUI(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonUI(action, virtualPad.buttonB, state));					
+			case A_B_E:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonUI(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonUI(action, virtualPad.buttonB, state));	
+			case A_B_X_Y:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonUI(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonUI(action, virtualPad.buttonB, state));		
+			case A_B_C_X_Y:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonUI(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonUI(action, virtualPad.buttonB, state));	
+                        case A_B_C_X_Y_Z:
+                                //nothing
+                        case FULL:
+                                //nothing
+			case NONE:
+		}
+	}
+
+	public function setVirtualPadNOTES(virtualPad:FlxVirtualPad, ?DPad:FlxDPadMode, ?Action:FlxActionMode) 
+	{
+		switch (DPad)
+		{
+			case UP_DOWN:
+				inline forEachBound(Control.NOTE_UP, (action, state) -> addbuttonNOTES(action, virtualPad.buttonUp, state));
+				inline forEachBound(Control.NOTE_DOWN, (action, state) -> addbuttonNOTES(action, virtualPad.buttonDown, state));
+			case LEFT_RIGHT:
+				inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonLeft, state));
+				inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonRight, state));
+			case UP_LEFT_RIGHT:
+				inline forEachBound(Control.NOTE_UP, (action, state) -> addbuttonNOTES(action, virtualPad.buttonUp, state));
+				inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonLeft, state));
+				inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonRight, state));
+			case FULL | RIGHT_FULL:
+				inline forEachBound(Control.NOTE_UP, (action, state) -> addbuttonNOTES(action, virtualPad.buttonUp, state));
+				inline forEachBound(Control.NOTE_DOWN, (action, state) -> addbuttonNOTES(action, virtualPad.buttonDown, state));
+				inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonLeft, state));
+				inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonRight, state));
+			case DUO:
+				inline forEachBound(Control.NOTE_UP, (action, state) -> addbuttonNOTES(action, virtualPad.buttonUp, state));
+				inline forEachBound(Control.NOTE_DOWN, (action, state) -> addbuttonNOTES(action, virtualPad.buttonDown, state));
+				inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonLeft, state));
+				inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonRight, state));
+
+				inline forEachBound(Control.NOTE_UP, (action, state) -> addbuttonNOTES(action, virtualPad.buttonUp2, state));
+				inline forEachBound(Control.NOTE_DOWN, (action, state) -> addbuttonNOTES(action, virtualPad.buttonDown2, state));
+				inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonLeft2, state));
+				inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonRight2, state));
+			case NONE:
+		}
+
+		switch (Action)
+		{
+			case A:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonA, state));
+                        case B:
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonNOTES(action, virtualPad.buttonB, state));
+			case D:
+                                //nothing							
+			case A_B:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonNOTES(action, virtualPad.buttonB, state));
+			case A_B_C:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonNOTES(action, virtualPad.buttonB, state));				
+			case A_B_E:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonNOTES(action, virtualPad.buttonB, state));
+			case A_B_X_Y:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonNOTES(action, virtualPad.buttonB, state));
+			case A_B_C_X_Y:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonNOTES(action, virtualPad.buttonB, state));			
+                        case A_B_C_X_Y_Z:
+                                //nothing
+                        case FULL:
+                                //nothing                
+			case NONE:
+		}
+	}
+	
+
+	public function removeFlxInput(Tinputs) {
+		for (action in this.digitalActions)
+		{
+			var i = action.inputs.length;
+			
+			while (i-- > 0)
+			{
+				var input = action.inputs[i];
+
+				var x = Tinputs.length;
+				while (x-- > 0)
+					if (Tinputs[x] == input)
+						action.remove(input);
+			}
+		}
+	}	
 	#end
 
 	override function update()
@@ -801,30 +598,10 @@ class Controls extends FlxActionSet
 			case NOTE_DOWN: _note_down;
 			case NOTE_LEFT: _note_left;
 			case NOTE_RIGHT: _note_right;
-			case NOTE_SPACE: _note_space;
 			case ACCEPT: _accept;
 			case BACK: _back;
 			case PAUSE: _pause;
 			case RESET: _reset;
-
-			case A1: _a1;
-			case A2: _a2;
-			case A3: _a3;
-			case A4: _a4;
-			case A5: _a5;
-			case A6: _a6;
-			case A7: _a7;
-
-
-			case B1: _b1;
-			case B2: _b2;
-			case B3: _b3;
-			case B4: _b4;
-			case B5: _b5;
-			case B6: _b6;
-			case B7: _b7;
-			case B8: _b8;
-			case B9: _b9;
 		}
 	}
 
@@ -872,10 +649,6 @@ class Controls extends FlxActionSet
 				func(_note_right, PRESSED);
 				func(_note_rightP, JUST_PRESSED);
 				func(_note_rightR, JUST_RELEASED);
-			case NOTE_SPACE:
-				func(_note_space, PRESSED);
-				func(_note_spaceP, JUST_PRESSED);
-				func(_note_spaceR, JUST_RELEASED);
 			case NOTE_DOWN:
 				func(_note_down, PRESSED);
 				func(_note_downP, JUST_PRESSED);
@@ -888,73 +661,6 @@ class Controls extends FlxActionSet
 				func(_pause, JUST_PRESSED);
 			case RESET:
 				func(_reset, JUST_PRESSED);
-
-			case A1:
-				func(_a1, PRESSED);
-				func(_a1P, JUST_PRESSED);
-				func(_a1R, JUST_RELEASED);
-			case A2:
-				func(_a2, PRESSED);
-				func(_a2P, JUST_PRESSED);
-				func(_a2R, JUST_RELEASED);
-			case A3:
-				func(_a3, PRESSED);
-				func(_a3P, JUST_PRESSED);
-				func(_a3R, JUST_RELEASED);
-			case A4:
-				func(_a4, PRESSED);
-				func(_a4P, JUST_PRESSED);
-				func(_a4R, JUST_RELEASED);
-			case A5:
-				func(_a5, PRESSED);
-				func(_a5P, JUST_PRESSED);
-				func(_a5R, JUST_RELEASED);
-			case A6:
-				func(_a6, PRESSED);
-				func(_a6P, JUST_PRESSED);
-				func(_a6R, JUST_RELEASED);
-			case A7:
-				func(_a7, PRESSED);
-				func(_a7P, JUST_PRESSED);
-				func(_a7R, JUST_RELEASED);
-
-
-			case B1:
-				func(_b1, PRESSED);
-				func(_b1P, JUST_PRESSED);
-				func(_b1R, JUST_RELEASED);
-			case B2:
-				func(_b2, PRESSED);
-				func(_b2P, JUST_PRESSED);
-				func(_b2R, JUST_RELEASED);
-			case B3:
-				func(_b3, PRESSED);
-				func(_b3P, JUST_PRESSED);
-				func(_b3R, JUST_RELEASED);
-			case B4:
-				func(_b4, PRESSED);
-				func(_b4P, JUST_PRESSED);
-				func(_b4R, JUST_RELEASED);
-			case B5:
-				func(_b5, PRESSED);
-				func(_b5P, JUST_PRESSED);
-				func(_b5R, JUST_RELEASED);
-			case B6:
-				func(_b6, PRESSED);
-				func(_b6P, JUST_PRESSED);
-				func(_b6R, JUST_RELEASED);
-			case B7:
-				func(_b7, PRESSED);
-				func(_b7P, JUST_PRESSED);
-				func(_b7R, JUST_RELEASED);
-			case B8:
-				func(_b8, PRESSED);
-				func(_b8P, JUST_PRESSED);
-				func(_b8R, JUST_RELEASED);
-			case B9:
-				func(_b9, PRESSED);
-				func(_b9P, JUST_PRESSED);
-				func(_b9R, JUST_RELEASED);
 		}
 	}
 
@@ -1044,10 +750,7 @@ class Controls extends FlxActionSet
 		}
 	}
 
-	/**
-	 * Sets all actions that pertain to the binder to trigger when the supplied keys are used.
-	 * If binder is a literal you can inline this
-	 */
+        #if !android
 	public function bindKeys(control:Control, keys:Array<FlxKey>)
 	{
 		var copyKeys:Array<FlxKey> = keys.copy();
@@ -1062,10 +765,6 @@ class Controls extends FlxActionSet
 		#end
 	}
 
-	/**
-	 * Sets all actions that pertain to the binder to trigger when the supplied keys are used.
-	 * If binder is a literal you can inline this
-	 */
 	public function unbindKeys(control:Control, keys:Array<FlxKey>)
 	{
 		var copyKeys:Array<FlxKey> = keys.copy();
@@ -1079,6 +778,27 @@ class Controls extends FlxActionSet
 		forEachBound(control, function(action, _) removeKeys(action, copyKeys));
 		#end
 	}
+	
+	#else
+
+	public function bindKeys(control:Control, keys:Array<FlxKey>)
+	{
+		#if (haxe >= "4.0.0")
+		inline forEachBound(control, (action, state) -> addKeys(action, keys, state));
+		#else
+		forEachBound(control, function(action, state) addKeys(action, keys, state));
+		#end	
+	}
+
+	public function unbindKeys(control:Control, keys:Array<FlxKey>)
+	{
+		#if (haxe >= "4.0.0")
+		inline forEachBound(control, (action, _) -> removeKeys(action, keys));
+		#else
+		forEachBound(control, function(action, _) removeKeys(action, keys));
+		#end		
+	}	
+	#end
 
 	inline static function addKeys(action:FlxActionDigital, keys:Array<FlxKey>, state:FlxInputState)
 	{
@@ -1117,11 +837,10 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.NOTE_DOWN, [S, FlxKey.DOWN]);
 				inline bindKeys(Control.NOTE_LEFT, [A, FlxKey.LEFT]);
 				inline bindKeys(Control.NOTE_RIGHT, [D, FlxKey.RIGHT]);
-				inline bindKeys(Control.NOTE_SPACE, [SPACE, FlxKey.SPACE]);
 				inline bindKeys(Control.ACCEPT, [Z, SPACE, ENTER]);
 				inline bindKeys(Control.BACK, [X, BACKSPACE, ESCAPE]);
 				inline bindKeys(Control.PAUSE, [P, ENTER, ESCAPE]);
-				//inline bindKeys(Control.RESET, []);
+				inline bindKeys(Control.RESET, [R]);
 			case Duo(true):
 				inline bindKeys(Control.UI_UP, [W]);
 				inline bindKeys(Control.UI_DOWN, [S]);
@@ -1131,11 +850,10 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.NOTE_DOWN, [S]);
 				inline bindKeys(Control.NOTE_LEFT, [A]);
 				inline bindKeys(Control.NOTE_RIGHT, [D]);
-				inline bindKeys(Control.NOTE_SPACE, [SPACE]);
 				inline bindKeys(Control.ACCEPT, [G, Z]);
 				inline bindKeys(Control.BACK, [H, X]);
 				inline bindKeys(Control.PAUSE, [ONE]);
-				//inline bindKeys(Control.RESET, [R]);
+				inline bindKeys(Control.RESET, [R]);
 			case Duo(false):
 				inline bindKeys(Control.UI_UP, [FlxKey.UP]);
 				inline bindKeys(Control.UI_DOWN, [FlxKey.DOWN]);
@@ -1145,11 +863,10 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.NOTE_DOWN, [FlxKey.DOWN]);
 				inline bindKeys(Control.NOTE_LEFT, [FlxKey.LEFT]);
 				inline bindKeys(Control.NOTE_RIGHT, [FlxKey.RIGHT]);
-				inline bindKeys(Control.NOTE_SPACE, [FlxKey.SPACE]);
 				inline bindKeys(Control.ACCEPT, [O]);
 				inline bindKeys(Control.BACK, [P]);
 				inline bindKeys(Control.PAUSE, [ENTER]);
-				//inline bindKeys(Control.RESET, [BACKSPACE]);
+				inline bindKeys(Control.RESET, [BACKSPACE]);
 			case None: // nothing
 			case Custom: // nothing
 		}
@@ -1165,11 +882,10 @@ class Controls extends FlxActionSet
 				bindKeys(Control.NOTE_DOWN, [S, FlxKey.DOWN]);
 				bindKeys(Control.NOTE_LEFT, [A, FlxKey.LEFT]);
 				bindKeys(Control.NOTE_RIGHT, [D, FlxKey.RIGHT]);
-				bindKeys(Control.NOTE_RIGHT, [SPACE, FlxKey.SPACE]);
 				bindKeys(Control.ACCEPT, [Z, SPACE, ENTER]);
 				bindKeys(Control.BACK, [BACKSPACE, ESCAPE]);
 				bindKeys(Control.PAUSE, [P, ENTER, ESCAPE]);
-				//bindKeys(Control.RESET, [R]);
+				bindKeys(Control.RESET, [R]);
 			case Duo(true):
 				bindKeys(Control.UI_UP, [W]);
 				bindKeys(Control.UI_DOWN, [S]);
@@ -1179,11 +895,10 @@ class Controls extends FlxActionSet
 				bindKeys(Control.NOTE_DOWN, [S]);
 				bindKeys(Control.NOTE_LEFT, [A]);
 				bindKeys(Control.NOTE_RIGHT, [D]);
-				bindKeys(Control.NOTE_SPACE, [SPACE]);
 				bindKeys(Control.ACCEPT, [G, Z]);
 				bindKeys(Control.BACK, [H, X]);
 				bindKeys(Control.PAUSE, [ONE]);
-				//bindKeys(Control.RESET, [R]);
+				bindKeys(Control.RESET, [R]);
 			case Duo(false):
 				bindKeys(Control.UI_UP, [FlxKey.UP]);
 				bindKeys(Control.UI_DOWN, [FlxKey.DOWN]);
@@ -1193,11 +908,10 @@ class Controls extends FlxActionSet
 				bindKeys(Control.NOTE_DOWN, [FlxKey.DOWN]);
 				bindKeys(Control.NOTE_LEFT, [FlxKey.LEFT]);
 				bindKeys(Control.NOTE_RIGHT, [FlxKey.RIGHT]);
-				bindKeys(Control.NOTE_SPACE, [FlxKey.SPACE]);
 				bindKeys(Control.ACCEPT, [O]);
 				bindKeys(Control.BACK, [P]);
 				bindKeys(Control.PAUSE, [ENTER]);
-				//bindKeys(Control.RESET, [BACKSPACE]);
+				bindKeys(Control.RESET, [BACKSPACE]);
 			case None: // nothing
 			case Custom: // nothing
 		}
