@@ -83,25 +83,6 @@ class ClientPrefs {
 		[Control.BACK, 'Back'],
 		[Control.PAUSE, 'Pause'],
 
-		[Control.NOTE_SPACE, 'Center  '], //space space
-
-		[Control.A1, 'Left 1'],
-		[Control.A2, 'Up  '],
-		[Control.A3, 'Right 1'],
-		[Control.A4, 'Center'],
-		[Control.A5, 'Left 2'],
-		[Control.A6, 'Down  '],
-		[Control.A7, 'Right 2'],
-
-		[Control.B1, 'Left 1 '],
-		[Control.B2, 'Down 1'],
-		[Control.B3, 'Up 1'],
-		[Control.B4, 'Right 1 '],
-		[Control.B5, 'Center '],
-		[Control.B6, 'Left 2 '],
-		[Control.B7, 'Down 2'],
-		[Control.B8, 'Up 2'],
-		[Control.B9, 'Right 2 ']
 	];
 	public static var lastControls:Array<FlxKey> = defaultKeys.copy();
 
