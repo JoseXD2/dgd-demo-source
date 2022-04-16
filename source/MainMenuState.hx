@@ -187,7 +187,11 @@ class MainMenuState extends MusicBeatState
 			ClientPrefs.saveSettings();
 		}
 		#end
-
+			
+                #if android
+	        addVirtualPad(UP_DOWN, A);
+                #end
+			
 		super.create();
 	}
 
