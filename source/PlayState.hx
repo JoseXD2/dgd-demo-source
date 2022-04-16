@@ -4180,13 +4180,7 @@ class PlayState extends MusicBeatState
 		var down = controls.NOTE_DOWN;
 		var left = controls.NOTE_LEFT;
 
-		.
-            controls.B3_R,
-            controls.B4_R,
-            controls.B6_R,
-            controls.B7_R,
-            controls.B8_R,
-            controls.B9_R
+
         ];
 
 		var nR = [
