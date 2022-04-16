@@ -4180,136 +4180,7 @@ class PlayState extends MusicBeatState
 		var down = controls.NOTE_DOWN;
 		var left = controls.NOTE_LEFT;
 
-		var fH = [
-            controls.NOTE_LEFT,
-            controls.NOTE_DOWN,
-            controls.NOTE_SPACE,
-            controls.NOTE_UP,
-            controls.NOTE_RIGHT
-        ];
-
-		var sH = [
-			controls.A1,
-			controls.A2,
-			controls.A3,
-			controls.A5,
-			controls.A6,
-			controls.A7
-		];
-		
-		var vH = [
-			controls.A1,
-			controls.A2,
-			controls.A3,
-			controls.A4,
-			controls.A5,
-			controls.A6,
-			controls.A7
-		];
-
-		var eH = [
-            controls.B1,
-            controls.B2,
-            controls.B3,
-            controls.B4,
-            controls.B6,
-            controls.B7,
-            controls.B8,
-            controls.B9
-		];
-
-		var nH = [
-			controls.B1,
-			controls.B2,
-			controls.B3,
-			controls.B4,
-			controls.B5,
-			controls.B6,
-			controls.B7,
-			controls.B8,
-			controls.B9
-		];
-
-		var fP = [
-            controls.NOTE_LEFT_P,
-            controls.NOTE_DOWN_P,
-            controls.NOTE_SPACE_P,
-            controls.NOTE_UP_P,
-            controls.NOTE_RIGHT_P
-        ];
-
-		var sP = [
-			controls.A1_P,
-			controls.A2_P,
-			controls.A3_P,
-			controls.A5_P,
-			controls.A6_P,
-			controls.A7_P
-		];
-
-		var vP = [
-			controls.A1_P,
-			controls.A2_P,
-			controls.A3_P,
-			controls.A4_P,
-			controls.A5_P,
-			controls.A6_P,
-			controls.A7_P
-		];
-
-        var eP = [
-            controls.B1_P,
-            controls.B2_P,
-            controls.B3_P,
-            controls.B4_P,
-            controls.B6_P,
-            controls.B7_P,
-            controls.B8_P,
-            controls.B9_P
-		];
-		
-		var nP = [
-			controls.B1_P,
-			controls.B2_P,
-			controls.B3_P,
-			controls.B4_P,
-			controls.B5_P,
-			controls.B6_P,
-			controls.B7_P,
-			controls.B8_P,
-			controls.B9_P
-		];
-
-		var fR = [
-            controls.NOTE_LEFT_R,
-            controls.NOTE_DOWN_R,
-            controls.NOTE_SPACE_R,
-            controls.NOTE_UP_R,
-            controls.NOTE_RIGHT_R
-        ];
-
-		var sR = [
-			controls.A1_R,
-			controls.A2_R,
-			controls.A3_R,
-			controls.A5_R,
-			controls.A6_R,
-			controls.A7_R
-		];
-
-		var vR = [
-			controls.A1_R,
-			controls.A2_R,
-			controls.A3_R,
-			controls.A4_R,
-			controls.A5_R,
-			controls.A6_R,
-			controls.A7_R
-		];
-
-		var eR = [
-            controls.B1_R,
-            controls.B2_R,
+		.
             controls.B3_R,
             controls.B4_R,
             controls.B6_R,
@@ -4486,36 +4357,10 @@ class PlayState extends MusicBeatState
 		});
 	}
 
-	function badNoteHit():Void {
-		var sP = [
-			controls.A1_P,
-			controls.A2_P,
-			controls.A3_P,
-			controls.A5_P,
-			controls.A6_P,
-			controls.A7_P
-		];
-
-		var vP = [
-			controls.A1_P,
-			controls.A2_P,
-			controls.A3_P,
-			controls.A4_P,
-			controls.A5_P,
-			controls.A6_P,
-			controls.A7_P
-		];
-
-		var nP = [
-			controls.B1_P,
-			controls.B2_P,
-			controls.B3_P,
-			controls.B4_P,
-			controls.B5_P,
-			controls.B6_P,
-			controls.B7_P,
-			controls.B8_P,
-			controls.B9_P
+	 //  function badNoteHit():Void {
+		
+			
+			
 		];
 
 		var controlArray:Array<Bool> = [controls.NOTE_LEFT_P, controls.NOTE_DOWN_P, controls.NOTE_UP_P, controls.NOTE_RIGHT_P];
@@ -5714,10 +5559,8 @@ class PlayState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('exit'));
 					toDfS = 1;
 				case 720:
-					var video:MP4Handler = new MP4Handler();
-
-					video.playMP4(Paths.video('zoinks'));
-					video.finishCallback = function()
+					va
+					
 					{
 						endSong();
 					}
