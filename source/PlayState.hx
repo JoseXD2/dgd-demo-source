@@ -4336,10 +4336,7 @@ class PlayState extends MusicBeatState
 	}
 
 	 //  function badNoteHit():Void {
-		
-			
-			
-		];
+
 
 		var controlArray:Array<Bool> = [controls.NOTE_LEFT_P, controls.NOTE_DOWN_P, controls.NOTE_UP_P, controls.NOTE_RIGHT_P];
 
