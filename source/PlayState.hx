@@ -4334,21 +4334,6 @@ class PlayState extends MusicBeatState
 			}
 		});
 	}
-
-	 //  function badNoteHit():Void {
-
-
-		var controlArray:Array<Bool> = [controls.NOTE_LEFT_P, controls.NOTE_DOWN_P, controls.NOTE_UP_P, controls.NOTE_RIGHT_P];
-
-		switch (mania)
-		{
-			case 1:
-				controlArray = sP;
-			case 2:
-				controlArray = vP;
-			case 3:
-				controlArray = nP;
-		}
 		for (i in 0...controlArray.length) {
 			if(controlArray[i]) {
 				noteMiss(i);
