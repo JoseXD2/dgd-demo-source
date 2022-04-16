@@ -4167,31 +4167,28 @@ class PlayState extends MusicBeatState
 
 	private function keyShit():Void
 	{
+		var up = controls.UP;
+		var right = controls.RIGHT;
+		var down = controls.DOWN;
+		var left = controls.LEFT;
 
-		if (dad.animation.curAnim.name.contains('idle'))
-			dad.camNoteHitOffset = [0,0];
-		if (boyfriend.animation.curAnim.name.contains('idle'))
-			boyfriend.camNoteHitOffset = [0,0];
+		var upP = controls.UP_P;
+		var rightP = controls.RIGHT_P;
+		var downP = controls.DOWN_P;
+		var leftP = controls.LEFT_P;
 
+		var mid = controls.MID;
+		var up2 = controls.UP2;
+		var right2 = controls.RIGHT2;
+		var down2 = controls.DOWN2;
+		var left2 = controls.LEFT2;
 
-		// HOLDING
-		var up = controls.NOTE_UP;
-		var right = controls.NOTE_RIGHT;
-		var down = controls.NOTE_DOWN;
-		var left = controls.NOTE_LEFT;
-
-
-        ];
-		var upP = controls.NOTE_UP_P;
-		var rightP = controls.NOTE_RIGHT_P;
-		var downP = controls.NOTE_DOWN_P;
-		var leftP = controls.NOTE_LEFT_P;
-
-		var upR = controls.NOTE_UP_R;
-		var rightR = controls.NOTE_RIGHT_R;
-		var downR = controls.NOTE_DOWN_R;
-		var leftR = controls.NOTE_LEFT_R;
-
+		var midP = controls.MID_P;
+		var up2P = controls.UP2_P;
+		var right2P = controls.RIGHT2_P;
+		var down2P = controls.DOWN2_P;
+		var left2P = controls.LEFT2_P;
+ 
 		var controlArray:Array<Bool> = [leftP, downP, upP, rightP];
 		var controlReleaseArray:Array<Bool> = [leftR, downR, upR, rightR];
 		var controlHoldArray:Array<Bool> = [left, down, up, right];
